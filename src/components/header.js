@@ -43,9 +43,14 @@ const Header = () => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <div className='card_details d-flex justify-content-center align-items-center' style={{width:"24rem", padding:10, position:"relative"}}>
+            <i className='fas fa-close smallclose' style={{position:"absolute", top:2, right:20, fontSize:23, cursor: "pointer"}}
+            onClick={handleClose}></i>
+            <p>
+              Your cart is Empty
+            </p>
+            <img src="./cart.gif" alt='' className='emptycart_img' style={{width:"5rem", padding:10}}/>
+          </div>
         </Menu>
       </Navbar>
     </>
