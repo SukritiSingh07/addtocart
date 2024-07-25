@@ -4,10 +4,10 @@ const INIT_STATE={
 
 export const cartreducer=(state=INIT_STATE, action)=>{
     switch(action.type){
-        case "ADD CART": 
+        case "ADD_CART": 
             return {
                 ...state,
-                cart:[...state.carts,action.payload]
+                carts: [...state.carts,action.payload]
             }
         default: 
             return state
