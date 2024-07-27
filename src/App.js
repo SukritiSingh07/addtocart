@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route} from "react-router-dom";
-import CardDetails from './components/CardDetails';
+import CardsDetails from './components/CardsDetails';
 import Cards from './components/Cards';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <Header />
     <Routes>
       <Route path="/" element={<Cards />} />
-      <Route path="/cart" element={<CardDetails />} />
+      <Route path="/cart/:id" element={<CardsDetails />} />
     </Routes>
    </>
   );

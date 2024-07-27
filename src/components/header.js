@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Container, NavLink, Table } from 'react-bootstrap';
+import { Navbar, Nav, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Badge from '@mui/material/Badge';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
 
   const getData=useSelector((state)=> state.cartreducer.carts);
-  console.log(getData); 
+  // console.log(getData); 
 
   const [anchorEl, setAnchorEl] = useState  (null);
   const open = Boolean(anchorEl);
@@ -67,7 +68,9 @@ const Header = () => {
                       <>
                         <tr>
                           <td>
+                            <NavLink to ={`/cart/${e.id}`} onClick={handleClose}>
                             <img src={e.imgdata} style={{width:"5rem", height:"5rem"}} alt=""/>
+                            </NavLink>
                           </td>
                           <td>
                             <p>{e.rname}</p>
@@ -85,6 +88,7 @@ const Header = () => {
                     )
                   })
                 }
+                <p className="text-center">Total : ₹300</p>
               </tbody>
             </Table>
           </div>:
