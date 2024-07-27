@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -6,12 +6,16 @@ import Badge from '@mui/material/Badge';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { DLT } from '../redux/actions/action';
 
 const Header = () => {
-
+  const [price, setPrice]=useState(0);
+  // console.log(price);
   const getData=useSelector((state)=> state.cartreducer.carts);
   // console.log(getData); 
+
+  const dispatch= useDispatch();
 
   const [anchorEl, setAnchorEl] = useState  (null);
   const open = Boolean(anchorEl);
@@ -22,6 +26,21 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const dlt=(id)=>{
+    dispatch(DLT(id));
+  }
+
+  const total=()=>{
+    let price=0;
+    getData.map((ele,k)=>{
+      price=ele.price*ele.qnty+price;
+    })
+    setPrice(price);
+  };
+
+  useEffect(()=>{
+    total();
+  },[total])
 
   return (
     <>
@@ -76,11 +95,11 @@ const Header = () => {
                             <p>{e.rname}</p>
                             <p>Price: ₹{e.price}</p>
                             <p>Quantity: {e.qnty }</p>
-                            <p style={{color:"red",fontSize:20, cursor:"pointer"}}>
+                            <p style={{color:"red",fontSize:20, cursor:"pointer"}} onClick={()=>dlt(e.id)}>
                               <i className='fas fa-trash smalltrash '></i>
                             </p>
                           </td>
-                          <td className='mt-5' style={{color:"red",fontSize:20, cursor:"pointer"}}>
+                          <td className='mt-5' style={{color:"red",fontSize:20, cursor:"pointer"}} onClick={()=>dlt(e.id)}>
                               <i className='fas fa-trash largetrash'></i>
                           </td>
                         </tr>
@@ -88,7 +107,7 @@ const Header = () => {
                     )
                   })
                 }
-                <p className="text-center">Total : ₹300</p>
+                <p className="text-center">Total : ₹{price}</p>
               </tbody>
             </Table>
           </div>:
